@@ -3,22 +3,25 @@ package com.givinghand.rest;
 import com.givinghand.dto.*;
 import com.givinghand.service.UserService;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Path("/api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
-	@Inject
+
+    @Inject
     private UserService userService;
 
     @POST
     @Path("/register")
+    @PermitAll
     public Response register(RegisterDTO dto) {
         try {
             userService.register(dto);
@@ -34,6 +37,7 @@ public class UserResource {
 
     @POST
     @Path("/login")
+    @PermitAll
     public Response login(LoginDTO dto) {
         try {
             String token = userService.login(dto);
@@ -50,6 +54,7 @@ public class UserResource {
 
     @PUT
     @Path("/profile/{userId}")
+    @RolesAllowed({"DONOR", "ORGANIZATION"})
     public Response updateProfile(@PathParam("userId") Long userId, ProfileDTO dto) {
         try {
             userService.updateProfile(userId, dto);

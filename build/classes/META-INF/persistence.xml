@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Registers all JPA entities used by the GivingHand REST application.
+    Endpoints covered by these entities include user, campaign, donation, warehouse, inventory, and notification APIs.
+    Important notes: the persistence unit uses JTA with ExampleDS on JBoss EAP 7.3 and H2 via Hibernate.
+-->
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
     <persistence-unit name="givinghandPU" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <class>com.givinghand.model.User</class>
+        <class>com.givinghand.model.Campaign</class>
+        <class>com.givinghand.model.CampaignItem</class>
+        <class>com.givinghand.model.Donation</class>
+        <class>com.givinghand.model.Warehouse</class>
+        <class>com.givinghand.model.WarehouseItem</class>
+        <class>com.givinghand.model.NotificationEvent</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>

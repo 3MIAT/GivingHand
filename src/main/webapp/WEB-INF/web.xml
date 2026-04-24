@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>GivingHand</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.xhtml</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.xhtml</welcome-file>
-  </welcome-file-list>
+<!--
+    Declares the GivingHand web security rules for the REST API.
+    Endpoints covered include campaign, donation, warehouse, inventory, profile, register, login, and notification routes.
+    Important notes: GET /api/campaigns is available to both DONOR and ORGANIZATION, while write operations remain role-restricted.
+-->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>GivingHand</display-name>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Campaign Browse APIs</web-resource-name>
+            <url-pattern>/api/campaigns</url-pattern>
+            <url-pattern>/api/campaigns/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>DONOR</role-name>
+            <role-name>ORGANIZATION</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Organization Campaign APIs</web-resource-name>
+            <url-pattern>/api/campaigns/*</url-pattern>
+            <http-method>POST</http-method>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ORGANIZATION</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Organization Resource APIs</web-resource-name>
+            <url-pattern>/api/warehouse/*</url-pattern>
+            <url-pattern>/api/inventory/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ORGANIZATION</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Donor APIs</web-resource-name>
+            <url-pattern>/api/donations/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>DONOR</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Shared Profile APIs</web-resource-name>
+            <url-pattern>/api/profile/*</url-pattern>
+            <url-pattern>/api/notifications</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>DONOR</role-name>
+            <role-name>ORGANIZATION</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>GivingHandRealm</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>DONOR</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>ORGANIZATION</role-name>
+    </security-role>
+
 </web-app>

@@ -1,21 +1,37 @@
 package com.givinghand.service;
 
-import com.givinghand.dto.*;
-import com.givinghand.model.*;
-import javax.ejb.Stateless;
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+
+import org.jboss.ejb3.annotation.SecurityDomain;
+
+import com.givinghand.dto.LoginDTO;
+import com.givinghand.dto.ProfileDTO;
+import com.givinghand.dto.RegisterDTO;
+import com.givinghand.model.Role;
+import com.givinghand.model.User;
+
+/**
+ * Provides user registration, login validation, and profile updates for the GivingHand API.
+ * Endpoints using this service are /api/register, /api/login, and /api/profile/{userId}.
+ * Important notes: passwords are hashed before persistence and role values are parsed from the
+ * exact donor/organization strings described in the project requirements.
+ */
 @Stateless
+@SecurityDomain("GivingHandRealm")
 public class UserService {
-	@PersistenceContext(unitName = "givinghandPU")
+
+    @PersistenceContext(unitName = "givinghandPU")
     private EntityManager em;
 
     public void register(RegisterDTO dto) {
-        if (isEmpty(dto.getEmail()) || isEmpty(dto.getPassword()) ||
-            isEmpty(dto.getName()) || isEmpty(dto.getBirthday()) ||
-            isEmpty(dto.getRole())) {
+        if (isEmpty(dto.getEmail()) || isEmpty(dto.getPassword()) || isEmpty(dto.getName()) || isEmpty(dto.getBirthday())
+                || isEmpty(dto.getRole())) {
             throw new IllegalArgumentException("All fields except bio are required.");
         }
 
@@ -34,18 +50,11 @@ public class UserService {
             throw new IllegalArgumentException("Birthday cannot be in the future.");
         }
 
-        Role role;
-        try {
-            role = Role.valueOf(dto.getRole().toUpperCase());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Role must be 'donor' or 'organization'.");
-        }
+        Role role = parseRole(dto.getRole());
 
-        Long count = (Long) em.createQuery(
-            "SELECT COUNT(u) FROM User u WHERE u.email = :email")
-            .setParameter("email", dto.getEmail())
-            .getSingleResult();
-        if (count > 0) {
+        Long count = (Long) em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email")
+                .setParameter("email", dto.getEmail()).getSingleResult();
+        if (count.longValue() > 0L) {
             throw new IllegalArgumentException("Email already registered.");
         }
 
@@ -59,23 +68,20 @@ public class UserService {
         em.persist(user);
     }
 
-    public String login(LoginDTO dt) {
-        if (isEmpty(dt.getEmail()) || isEmpty(dt.getPassword())) {
-            throw new IllegalArgumentException("Email and password are required.");
+    public String login(LoginDTO dto) {
+        if (isEmpty(dto.getEmail()) || isEmpty(dto.getPassword())) {
+            throw new SecurityException("Invalid credentials.");
         }
 
         try {
-            User user = (User) em.createQuery(
-                "SELECT u FROM User u WHERE u.email = :email")
-                .setParameter("email", dt.getEmail())
-                .getSingleResult();
+            User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email")
+                    .setParameter("email", dto.getEmail()).getSingleResult();
 
-            if (!PasswordUtil.verify(dt.getPassword(), user.getPassword())) {
+            if (!PasswordUtil.verify(dto.getPassword(), user.getPassword())) {
                 throw new SecurityException("Invalid credentials.");
             }
 
             return UUID.randomUUID().toString();
-
         } catch (NoResultException e) {
             throw new SecurityException("Invalid credentials.");
         }
@@ -86,12 +92,26 @@ public class UserService {
         if (user == null) {
             throw new IllegalArgumentException("User not found.");
         }
-        if (!isEmpty(dto.getName())) user.setName(dto.getName());
-        if (!isEmpty(dto.getBio()))  user.setBio(dto.getBio());
+        if (!isEmpty(dto.getName())) {
+            user.setName(dto.getName());
+        }
+        if (!isEmpty(dto.getBio())) {
+            user.setBio(dto.getBio());
+        }
         em.merge(user);
     }
 
-    private boolean isEmpty(String s) {
-        return s == null || s.trim().isEmpty();
+    private Role parseRole(String value) {
+        if ("donor".equalsIgnoreCase(value)) {
+            return Role.DONOR;
+        }
+        if ("organization".equalsIgnoreCase(value)) {
+            return Role.ORGANIZATION;
+        }
+        throw new IllegalArgumentException("Role must be 'donor' or 'organization'.");
+    }
+
+    private boolean isEmpty(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }
