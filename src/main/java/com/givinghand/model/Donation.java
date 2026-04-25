@@ -12,11 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * Stores a donor's commitment to provide a specific campaign item and tracks its lifecycle.
- * Endpoints using this entity are /api/donations/commit, /api/donations/{id}/status, /api/donations/{id}/edit, and /api/donations/{id}/cancel.
- * Important notes: only committed donations may be edited or cancelled, and distributed donations are added to donor history.
- */
+
 @Entity
 @Table(name = "donations")
 public class Donation {

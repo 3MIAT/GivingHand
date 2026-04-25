@@ -1,10 +1,6 @@
 package com.givinghand.dto;
 
-/**
- * Carries the donation commitment payload shown in the project PDF.
- * Endpoint using this DTO is /api/donations/commit.
- * Important notes: the JSON field names match the provided sample exactly.
- */
+
 public class CommitDonationDTO {
 
     private Long campaign_id;

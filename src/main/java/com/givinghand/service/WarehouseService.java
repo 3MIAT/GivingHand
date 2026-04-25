@@ -11,8 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.ejb3.annotation.SecurityDomain;
-
 import com.givinghand.dto.AllocateInventoryDTO;
 import com.givinghand.dto.CreateWarehouseDTO;
 import com.givinghand.dto.WarehouseInventoryDTO;
@@ -24,13 +22,8 @@ import com.givinghand.model.User;
 import com.givinghand.model.Warehouse;
 import com.givinghand.model.WarehouseItem;
 
-/**
- * Implements warehouse creation, inventory updates, warehouse lookup, and atomic resource allocation.
- * Endpoints using this service are /api/warehouse/create, /api/warehouse/{id}/add, /api/inventory/allocate, and /api/warehouse/{id}.
- * Important notes: allocate runs inside a required JTA transaction so stock and campaign received quantities succeed or fail together.
- */
+
 @Stateless
-@SecurityDomain("GivingHandRealm")
 public class WarehouseService {
 
     @PersistenceContext(unitName = "givinghandPU")

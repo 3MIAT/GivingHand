@@ -10,11 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * Stores the inventory lines inside a warehouse, including current stock and the baseline used for low-stock alerts.
- * Endpoints using this entity are /api/warehouse/{id}/add, /api/warehouse/{id}, and /api/inventory/allocate.
- * Important notes: original_quantity grows when stock is added so the 10% alert threshold remains meaningful after restocking.
- */
+
 @Entity
 @Table(name = "warehouse_items")
 public class WarehouseItem {

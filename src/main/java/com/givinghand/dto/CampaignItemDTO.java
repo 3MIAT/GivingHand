@@ -1,10 +1,6 @@
 package com.givinghand.dto;
 
-/**
- * Represents a campaign need-list item in request bodies and response payload construction.
- * Endpoints using this DTO are /api/campaigns/create and /api/campaigns/{id}/items.
- * Important notes: the JSON field names intentionally match the PDF examples exactly.
- */
+
 public class CampaignItemDTO {
 
     private String item_name;

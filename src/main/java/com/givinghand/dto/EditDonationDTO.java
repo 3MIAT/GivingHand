@@ -1,10 +1,6 @@
 package com.givinghand.dto;
 
-/**
- * Carries the editable fields for a committed donation.
- * Endpoint using this DTO is /api/donations/{id}/edit.
- * Important notes: only committed donations may use this payload successfully.
- */
+
 public class EditDonationDTO {
 
     private String item_name;

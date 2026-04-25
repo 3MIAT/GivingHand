@@ -2,11 +2,7 @@ package com.givinghand.dto;
 
 import java.util.List;
 
-/**
- * Carries the campaign creation and item-update payload described in the project PDF.
- * Endpoints using this DTO are /api/campaigns/create and /api/campaigns/{id}/items.
- * Important notes: needed_items is required and each item must include item_name and target_quantity.
- */
+
 public class CreateCampaignDTO {
 
     private String title;

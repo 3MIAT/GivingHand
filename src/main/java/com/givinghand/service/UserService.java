@@ -8,22 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.ejb3.annotation.SecurityDomain;
-
 import com.givinghand.dto.LoginDTO;
 import com.givinghand.dto.ProfileDTO;
 import com.givinghand.dto.RegisterDTO;
 import com.givinghand.model.Role;
 import com.givinghand.model.User;
 
-/**
- * Provides user registration, login validation, and profile updates for the GivingHand API.
- * Endpoints using this service are /api/register, /api/login, and /api/profile/{userId}.
- * Important notes: passwords are hashed before persistence and role values are parsed from the
- * exact donor/organization strings described in the project requirements.
- */
+
 @Stateless
-@SecurityDomain("GivingHandRealm")
 public class UserService {
 
     @PersistenceContext(unitName = "givinghandPU")

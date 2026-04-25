@@ -7,11 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Stores each notification event that is sent to the JMS queue and later exposed through /api/notifications.
- * Endpoints using this entity are the notification-producing business APIs and /api/notifications.
- * Important notes: the JSON payload must expose only event_type, message, and timestamp as required by the PDF.
- */
+
 @Entity
 @Table(name = "notification_events")
 public class NotificationEvent {

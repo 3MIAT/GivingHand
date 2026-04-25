@@ -10,11 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * Stores each named item requested by a campaign together with target and received quantities.
- * Endpoints using this entity are /api/campaigns/create, /api/campaigns/{id}/items, and /api/campaigns.
- * Important notes: received_quantity is increased by the JTA-protected warehouse allocation flow.
- */
+
 @Entity
 @Table(name = "campaign_items")
 public class CampaignItem {

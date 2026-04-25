@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Binds the GivingHand web application to the JAAS security domain configured in JBoss EAP.
+    Endpoints covered are all secured REST routes declared in web.xml.
+    Important notes: JBoss EAP expects the security-domain value in the java:/jaas/<name> form for legacy JAAS integration.
+-->
 <jboss-web>
-    <security-domain>GivingHandRealm</security-domain>
+    <security-domain>java:/jaas/GivingHandRealm</security-domain>
 </jboss-web>

@@ -7,18 +7,14 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
-import javax.jms.TextMessage;
+//import javax.jms.TextMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.givinghand.model.NotificationEvent;
 import com.givinghand.model.NotificationEventType;
 
-/**
- * Persists notification events and sends their standardized JSON payloads to the GivingHand JMS queue.
- * Endpoints using this service are /api/notifications and the business endpoints that emit STOCK_LOW_ALERT and DONATION_RECEIVED.
- * Important notes: the queue uses the JBoss EAP compatible java:/jms/queue/GivingHandQueue lookup.
- */
+
 @Stateless
 @javax.jms.JMSDestinationDefinition(name = "java:/jms/queue/GivingHandQueue", interfaceName = "javax.jms.Queue", destinationName = "GivingHandQueue")
 public class NotificationService {

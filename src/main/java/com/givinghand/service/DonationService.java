@@ -9,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.ejb3.annotation.SecurityDomain;
-
 import com.givinghand.dto.CommitDonationDTO;
 import com.givinghand.dto.EditDonationDTO;
 import com.givinghand.model.Campaign;
@@ -22,13 +20,8 @@ import com.givinghand.model.NotificationEventType;
 import com.givinghand.model.Role;
 import com.givinghand.model.User;
 
-/**
- * Implements donation commitments, lifecycle updates, edits, cancellations, and donor history updates.
- * Endpoints using this service are /api/donations/commit, /api/donations/{id}/status, /api/donations/{id}/edit, and /api/donations/{id}/cancel.
- * Important notes: only committed donations may be edited or cancelled, and status changes follow Committed -> Received -> Distributed.
- */
+
 @Stateless
-@SecurityDomain("GivingHandRealm")
 public class DonationService {
 
     @PersistenceContext(unitName = "givinghandPU")

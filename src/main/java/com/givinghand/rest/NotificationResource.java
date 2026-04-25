@@ -16,11 +16,7 @@ import javax.ws.rs.core.Response;
 import com.givinghand.model.NotificationEvent;
 import com.givinghand.service.NotificationService;
 
-/**
- * Exposes the notification history REST API backed by stored JMS events.
- * Endpoint: GET /api/notifications.
- * Important notes: the response body is a JSON array of objects containing only event_type, message, and timestamp.
- */
+
 @Path("/api/notifications")
 @Produces(MediaType.APPLICATION_JSON)
 public class NotificationResource {

@@ -23,11 +23,7 @@ import com.givinghand.model.Warehouse;
 import com.givinghand.model.WarehouseItem;
 import com.givinghand.service.WarehouseService;
 
-/**
- * Exposes warehouse and inventory REST APIs, including the JTA-protected allocation endpoint.
- * Endpoints: POST /api/warehouse/create, POST /api/warehouse/{id}/add, POST /api/inventory/allocate, GET /api/warehouse/{id}.
- * Important notes: allocate is atomic and returns the exact success message shown in the PDF sample.
- */
+
 @Path("/api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

@@ -17,11 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * Stores campaigns created by organization users and the need list attached to each campaign.
- * Endpoints using this entity are /api/campaigns/create, /api/campaigns/{id}/status, /api/campaigns/{id}/items, and /api/campaigns.
- * Important notes: only open campaigns are returned by the browse endpoint, and item rows are managed through orphan removal.
- */
+
 @Entity
 @Table(name = "campaigns")
 public class Campaign {

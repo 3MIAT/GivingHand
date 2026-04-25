@@ -15,11 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * Stores a virtual warehouse owned by an organization user together with its inventory items.
- * Endpoints using this entity are /api/warehouse/create, /api/warehouse/{id}/add, and /api/warehouse/{id}.
- * Important notes: allocation to campaigns is handled separately by the JTA-protected /api/inventory/allocate endpoint.
- */
+
 @Entity
 @Table(name = "warehouses")
 public class Warehouse {

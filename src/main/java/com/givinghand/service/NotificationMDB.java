@@ -6,11 +6,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-/**
- * Receives GivingHandQueue messages and logs the standardized JSON notification payload to the console.
- * There is no direct REST endpoint for this MDB; it is triggered asynchronously by JMS producers in the business services.
- * Important notes: destinationLookup is configured for JBoss EAP 7.3 ActiveMQ Artemis compatibility.
- */
+
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
         @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:/jms/queue/GivingHandQueue") })

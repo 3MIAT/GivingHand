@@ -1,10 +1,6 @@
 package com.givinghand.dto;
 
-/**
- * Carries the inventory item payload shown in the warehouse add API sample.
- * Endpoint using this DTO is /api/warehouse/{id}/add.
- * Important notes: item_name, quantity, and category match the PDF field names exactly.
- */
+
 public class WarehouseInventoryDTO {
 
     private String item_name;

@@ -24,11 +24,7 @@ import com.givinghand.model.Campaign;
 import com.givinghand.model.CampaignItem;
 import com.givinghand.service.CampaignService;
 
-/**
- * Exposes the campaign management REST APIs for creating campaigns, updating status/items, and browsing open campaigns.
- * Endpoints: POST /api/campaigns/create, PUT /api/campaigns/{id}/status, PUT /api/campaigns/{id}/items, GET /api/campaigns.
- * Important notes: browse results include only Open campaigns and the JSON keys mirror the PDF naming style.
- */
+
 @Path("/api/campaigns")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

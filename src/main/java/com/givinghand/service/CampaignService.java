@@ -12,8 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.ejb3.annotation.SecurityDomain;
-
 import com.givinghand.dto.CampaignItemDTO;
 import com.givinghand.dto.CreateCampaignDTO;
 import com.givinghand.model.Campaign;
@@ -22,13 +20,8 @@ import com.givinghand.model.CampaignStatus;
 import com.givinghand.model.Role;
 import com.givinghand.model.User;
 
-/**
- * Implements campaign creation, status updates, item updates, and active campaign browsing.
- * Endpoints using this service are /api/campaigns/create, /api/campaigns/{id}/status, /api/campaigns/{id}/items, and /api/campaigns.
- * Important notes: only the owning organization may modify a campaign and browse results include only Open campaigns.
- */
+
 @Stateless
-@SecurityDomain("GivingHandRealm")
 public class CampaignService {
 
     @PersistenceContext(unitName = "givinghandPU")

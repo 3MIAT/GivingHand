@@ -1,10 +1,6 @@
 package com.givinghand.dto;
 
-/**
- * Carries the JTA-protected resource allocation payload shown in the project PDF.
- * Endpoint using this DTO is /api/inventory/allocate.
- * Important notes: warehouse_id, campaign_id, item_name, and quantity match the sample body exactly.
- */
+
 public class AllocateInventoryDTO {
 
     private Long warehouse_id;

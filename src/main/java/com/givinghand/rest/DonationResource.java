@@ -21,11 +21,7 @@ import com.givinghand.dto.StatusUpdateDTO;
 import com.givinghand.model.Donation;
 import com.givinghand.service.DonationService;
 
-/**
- * Exposes the donation commitment and lifecycle REST APIs for donors and organizations.
- * Endpoints: POST /api/donations/commit, PUT /api/donations/{id}/status, PUT /api/donations/{id}/edit, DELETE /api/donations/{id}/cancel.
- * Important notes: edit and cancel are allowed only while the donation is still Committed.
- */
+
 @Path("/api/donations")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
