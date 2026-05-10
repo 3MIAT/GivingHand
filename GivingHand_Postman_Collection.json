@@ -1,0 +1,655 @@
+{
+  "info": {
+    "name": "GivingHand APIs",
+    "description": "Postman Collection for GivingHand Java EE Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/GivingHand",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. User Management",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"charity@helpinghands.org\",\n    \"password\": \"SecurePassword123\",\n    \"name\": \"Helping Hands Org\",\n    \"bio\": \"Dedicated to disaster relief and food security.\",\n    \"birthday\": \"2000-01-01\",\n    \"role\": \"organization\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"charity@helpinghands.org\",\n    \"password\": \"SecurePassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Helping Hands Org Updated\",\n    \"bio\": \"Updated bio information\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/profile/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "profile",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Campaign Management",
+      "item": [
+        {
+          "name": "Create Campaign",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Winter Blanket Drive 2026\",\n    \"description\": \"Collecting blankets for the upcoming cold wave.\",\n    \"category\": \"Emergency Relief\",\n    \"needed_items\": [\n        {\"item_name\": \"Wool Blanket\", \"target_quantity\": 100},\n        {\"item_name\": \"Heater\", \"target_quantity\": 20}\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/campaigns/create",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "campaigns",
+                "create"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Campaign Status",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"PAUSED\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/campaigns/1/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "campaigns",
+                "1",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Campaign Items",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Winter Blanket Drive 2026\",\n    \"description\": \"Collecting blankets for the upcoming cold wave.\",\n    \"category\": \"Emergency Relief\",\n    \"needed_items\": [\n        {\"item_name\": \"Wool Blanket\", \"target_quantity\": 150},\n        {\"item_name\": \"Heater\", \"target_quantity\": 30}\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/campaigns/1/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "campaigns",
+                "1",
+                "items"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Browse Campaigns",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/campaigns?category=Emergency Relief",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "campaigns"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Emergency Relief"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Donation Management",
+      "item": [
+        {
+          "name": "Commit Donation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "DonorPassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "donor@example.com",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"campaign_id\": 1,\n    \"item_name\": \"Wool Blanket\",\n    \"quantity\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/donations/commit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "donations",
+                "commit"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Donation Status",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"RECEIVED\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/donations/1/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "donations",
+                "1",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Edit Donation Commitment",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "DonorPassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "donor@example.com",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"quantity\": 15\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/donations/1/edit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "donations",
+                "1",
+                "edit"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel Donation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "DonorPassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "donor@example.com",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/donations/1/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "donations",
+                "1",
+                "cancel"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Warehouse Management",
+      "item": [
+        {
+          "name": "Create Warehouse",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Main Storage Facility\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/warehouse/create",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "warehouse",
+                "create"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Inventory",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"item_name\": \"First Aid Kit\",\n    \"quantity\": 50,\n    \"category\": \"Medical\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/warehouse/1/add",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "warehouse",
+                "1",
+                "add"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Allocate Inventory",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"warehouse_id\": 1,\n    \"campaign_id\": 1,\n    \"item_name\": \"Wool Blanket\",\n    \"quantity\": 20\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/inventory/allocate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "inventory",
+                "allocate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "View Warehouse",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/warehouse/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "warehouse",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "SecurePassword123",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "charity@helpinghands.org",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/notifications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notifications"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
